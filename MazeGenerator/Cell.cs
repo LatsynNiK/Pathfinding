@@ -2,6 +2,6 @@
 {
     public class Cell
     {
-        private bool IsWall { get; set; }
+        public bool IsWall { get; set; }
     }
 }

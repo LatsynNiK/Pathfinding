@@ -1,13 +1,20 @@
 ﻿using System;
+using System.Drawing;
 
 namespace MazeGenerator
 {
     public abstract class MazeGenerator
     {
-        private const char Path = ' ';
-        private const char Wall = '#';
+        private static string Path = "  ";
+        private static string Wall = "##";
 
         public abstract Maze Generate(int width, int height);
+
+        public virtual void InitStartAndFinish(Maze maze)
+        {
+            maze.Start = new Point(1, 1);
+            maze.Start = new Point(maze.Height - 2, maze.Width - 2);
+        }
 
         public void Print(Maze maze)
         {
