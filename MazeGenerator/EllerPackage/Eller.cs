@@ -46,7 +46,7 @@ namespace MazeGenerator.EllerPackage
         private List<Set> sets;                             // A list of the sets in the current row.
         private List<Cell> row;                             // The current row. (NOTE: The Eller's only needs to load one row in the memory to generate a maze!)
        
-        private Cell[,] maze;                               // A two dimensional array of cells to store the maze into it.
+        public Cell[,] Field;                               // A two dimensional array of cells to store the maze into it.
 
         /// <summary>
         /// Generates the maze.
@@ -62,7 +62,7 @@ namespace MazeGenerator.EllerPackage
             this.width = width;                             // Sets the width of the maze.
             this.height = height;                           // Sets the height of the maze.
 
-            maze = new Cell[width, height];                 // Initalizes an empty two dimensional array to store the maze into it.
+            Field = new Cell[width, height];                 // Initalizes an empty two dimensional array to store the maze into it.
             sets = new List<Set>();                         // Initialize new list of sets.
             row = new List<Cell>();                         // Initialize new row.
 
@@ -309,7 +309,7 @@ namespace MazeGenerator.EllerPackage
                     HasRightWall = row[i].HasRightWall
                 };
 
-                maze[i, h] = cell;
+                Field[i, h] = cell;
             }
         }
 
@@ -361,15 +361,15 @@ namespace MazeGenerator.EllerPackage
 
                 for (int j = 0; j < width; j++)
                 {
-                    if (maze[j, i].HasRightWall && maze[j, i].HasBottomWall)
+                    if (Field[j, i].HasRightWall && Field[j, i].HasBottomWall)
                     {
                         Console.Write($"__|");
                     }
-                    else if (maze[j, i].HasRightWall && !maze[j, i].HasBottomWall)
+                    else if (Field[j, i].HasRightWall && !Field[j, i].HasBottomWall)
                     {
                         Console.Write($"  |");
                     }
-                    else if (maze[j, i].HasBottomWall && !maze[j, i].HasRightWall)
+                    else if (Field[j, i].HasBottomWall && !Field[j, i].HasRightWall)
                     {
                         Console.Write($"___");
                     }
@@ -435,7 +435,7 @@ namespace MazeGenerator.EllerPackage
                         continue;
                     }
 
-                    if (maze[x, y].HasRightWall && maze[x, y].HasBottomWall)
+                    if (Field[x, y].HasRightWall && Field[x, y].HasBottomWall)
                     {
                         mazeTranslation[i * 2, j * 2] = Path;                   // This is the top left block
                         mazeTranslation[i * 2, j * 2 + 1] = Wall;               // This is the top right block
@@ -453,7 +453,7 @@ namespace MazeGenerator.EllerPackage
                             mazeTranslation[i * 2 + 1, j * 2 - 1] = Wall;
                         }
                     }
-                    else if (maze[x, y].HasRightWall && !maze[x, y].HasBottomWall)
+                    else if (Field[x, y].HasRightWall && !Field[x, y].HasBottomWall)
                     {
                         mazeTranslation[i * 2, j * 2] = Path;                   // This is the top left block
                         mazeTranslation[i * 2, j * 2 + 1] = Wall;               // This is the top right block
@@ -466,7 +466,7 @@ namespace MazeGenerator.EllerPackage
                             mazeTranslation[i * 2 - 1, j * 2 + 1] = Wall;
                         }                          
                     }
-                    else if (!maze[x, y].HasRightWall && maze[x, y].HasBottomWall)
+                    else if (!Field[x, y].HasRightWall && Field[x, y].HasBottomWall)
                     {
                         mazeTranslation[i * 2, j * 2] = Path;                   // This is the top left block
                         mazeTranslation[i * 2, j * 2 + 1] = Path;               // This is the top right block
