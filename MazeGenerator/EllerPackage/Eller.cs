@@ -88,21 +88,21 @@ namespace MazeGenerator.EllerPackage
                         cell.HasBottomWall = true;
                     }
 
-                    // Rooms disabled
-                    // Create right walls
-                    for (int i = 0; i < row.Count - 1; i++)
-                    {
-                        // Delete all rows that divide different sets
-                        if (row[i].Set != row[i + 1].Set)
-                        {
-                            row[i].HasRightWall = false;
-                        }
-                        else
-                        {
-                            row[i].HasRightWall = true;
-                        }
+                    //// Rooms disabled
+                    //// Create right walls
+                    //for (int i = 0; i < row.Count - 1; i++)
+                    //{
+                    //    // Delete all rows that divide different sets
+                    //    if (row[i].Set != row[i + 1].Set)
+                    //    {
+                    //        row[i].HasRightWall = false;
+                    //    }
+                    //    else
+                    //    {
+                    //        row[i].HasRightWall = true;
+                    //    }
 
-                    }
+                    //}
 
                     // The last cell in a row always has to have a right wall because that's where the border of the maze is.
                     row[row.Count - 1].HasRightWall = true;
