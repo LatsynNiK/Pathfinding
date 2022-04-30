@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31515.178
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pathfinding", "Pathfinding\Pathfinding.csproj", "{EE6A8C27-0CD3-42C6-9714-0995F7D33545}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pathfinding", "Pathfinding\Pathfinding.csproj", "{EE6A8C27-0CD3-42C6-9714-0995F7D33545}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MazeGenerator", "MazeGenerator\MazeGenerator.csproj", "{1EA9A679-C68B-4061-9A06-19C1A8BA9DB9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MazeGenerator", "MazeGenerator\MazeGenerator.csproj", "{1EA9A679-C68B-4061-9A06-19C1A8BA9DB9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services", "Services\Services.csproj", "{C9D84111-10E0-4908-93E7-279781E0FE4A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{1EA9A679-C68B-4061-9A06-19C1A8BA9DB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1EA9A679-C68B-4061-9A06-19C1A8BA9DB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1EA9A679-C68B-4061-9A06-19C1A8BA9DB9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C9D84111-10E0-4908-93E7-279781E0FE4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C9D84111-10E0-4908-93E7-279781E0FE4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C9D84111-10E0-4908-93E7-279781E0FE4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C9D84111-10E0-4908-93E7-279781E0FE4A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

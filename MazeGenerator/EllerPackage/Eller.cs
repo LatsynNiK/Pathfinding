@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace EllersAlgorithm
+namespace MazeGenerator.EllerPackage
 {
     /// <summary>
     /// This class represents a "set" in the context of Eller's algorithm. 
@@ -33,7 +33,7 @@ namespace EllersAlgorithm
         // If the bias is a lot smaller than the maxBias the maze will be more vertically.
         // If the bias is a lot bigger than the maxBias the maze will be more horizontally.
         private const int MaxBias = 64;
-        private const int Bias = 32;
+        private const int Bias = 64;
 
         private const string Wall = "xx";                   // This is the symbol used to represent a wall
         private const string Path = "  ";                   // This is the symbol used to represent a path
