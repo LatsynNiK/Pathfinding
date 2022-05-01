@@ -9,6 +9,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MazeGenerator", "MazeGenera
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services", "Services\Services.csproj", "{C9D84111-10E0-4908-93E7-279781E0FE4A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LeePathFinder", "LeePathFinder\LeePathFinder.csproj", "{BFE93D73-2178-450C-863A-DC3E188F12FE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{B19D9140-9C11-4372-A726-4EADEDD81A1E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,14 @@ Global
 		{C9D84111-10E0-4908-93E7-279781E0FE4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C9D84111-10E0-4908-93E7-279781E0FE4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C9D84111-10E0-4908-93E7-279781E0FE4A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BFE93D73-2178-450C-863A-DC3E188F12FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BFE93D73-2178-450C-863A-DC3E188F12FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BFE93D73-2178-450C-863A-DC3E188F12FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BFE93D73-2178-450C-863A-DC3E188F12FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B19D9140-9C11-4372-A726-4EADEDD81A1E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B19D9140-9C11-4372-A726-4EADEDD81A1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B19D9140-9C11-4372-A726-4EADEDD81A1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B19D9140-9C11-4372-A726-4EADEDD81A1E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
