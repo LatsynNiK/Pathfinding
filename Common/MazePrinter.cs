@@ -40,6 +40,32 @@ namespace Common
             return this;
         }
 
+        public MazePrinter Clear()
+        {
+            for (var i = 0; i < _height; i++)
+            {
+                for (var j = 0; j < _width; j++)
+                {
+                    PrintedField[i, j].Value = Empty;
+                }
+            }
+            return this;
+        }
+
+        public MazePrinter ClearPaths()
+        {
+            for (var i = 0; i < _height; i++)
+            {
+                for (var j = 0; j < _width; j++)
+                {
+                    var cell = PrintedField[i, j].Value;
+                    if (cell == Wall || cell == Empty) continue;
+                    PrintedField[i, j].Value = Empty;
+                }
+            }
+            return this;
+        }
+
         public virtual void Print()
         {
             for (var i = 0; i < _height; i++)

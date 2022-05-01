@@ -2,7 +2,6 @@
 using System.Linq;
 using Common;
 using LeePathFinder;
-using MazeGenerator;
 
 namespace Pathfinding
 {
