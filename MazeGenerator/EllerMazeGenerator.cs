@@ -1,11 +1,13 @@
-﻿namespace MazeGenerator
+﻿using Common;
+
+namespace MazeGenerator
 {
     public class EllerMazeGenerator : MazeGenerator
     {
         public override Maze Generate(int width, int height)
         {
             var ellerMaze = GetEllerMaze(width, height);
-            ellerMaze.PrintMaze();
+            //ellerMaze.PrintMaze();
             var maze = TranslateToMaze(ellerMaze);
             base.InitStartAndFinish(maze);
             return maze;

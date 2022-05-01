@@ -5,4 +5,10 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj" />
+    <ProjectReference Include="..\LeePathFinder\LeePathFinder.csproj" />
+    <ProjectReference Include="..\MazeGenerator\MazeGenerator.csproj" />
+  </ItemGroup>
+
 </Project>
