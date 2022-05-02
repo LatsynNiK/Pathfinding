@@ -6,7 +6,7 @@ namespace MazeGenerator
     {
         public override Maze Generate(int width, int height)
         {
-            var ellerMaze = GetEllerMaze(width, height);
+            var ellerMaze = GetEllerMaze(ToEllerSize(width), ToEllerSize(height));
             //ellerMaze.PrintMaze();
             var maze = TranslateToMaze(ellerMaze);
             base.InitStartAndFinish(maze);
@@ -52,6 +52,12 @@ namespace MazeGenerator
             }
 
             return resultMaze;
+        }
+
+        private int ToEllerSize(int size)
+        {
+            var result = (size + 1) / 2;
+            return result;
         }
     }
 }
