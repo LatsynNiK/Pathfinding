@@ -32,8 +32,10 @@ namespace MazeGenerator.EllerPackage
         // The bias is in other words the "seed" of the maze and can affect its shape. 
         // If the bias is a lot smaller than the maxBias the maze will be more vertically.
         // If the bias is a lot bigger than the maxBias the maze will be more horizontally.
-        private const int MaxBias = 64;
-        private const int Bias = 64;
+        private const int MaxBias = 100;
+        private const int DefaultBias = 50;
+        private int bias;
+        private bool disableLoops;
 
         private const string Wall = "xx";                   // This is the symbol used to represent a wall
         private const string Path = "  ";                   // This is the symbol used to represent a path
@@ -57,10 +59,12 @@ namespace MazeGenerator.EllerPackage
         /// <param name="width">
         /// The width of the maze.
         /// </param>
-        public void GenerateMaze(int width, int height)
+        public void GenerateMaze(int width, int height, int bias = DefaultBias, bool disableLoops = false)
         {
             this.width = width;                             // Sets the width of the maze.
             this.height = height;                           // Sets the height of the maze.
+            this.bias = bias;
+            this.disableLoops = disableLoops;
 
             Field = new Cell[width, height];                 // Initalizes an empty two dimensional array to store the maze into it.
             sets = new List<Set>();                         // Initialize new list of sets.
@@ -88,21 +92,24 @@ namespace MazeGenerator.EllerPackage
                         cell.HasBottomWall = true;
                     }
 
-                    //// Rooms disabled
-                    //// Create right walls
-                    //for (int i = 0; i < row.Count - 1; i++)
-                    //{
-                    //    // Delete all rows that divide different sets
-                    //    if (row[i].Set != row[i + 1].Set)
-                    //    {
-                    //        row[i].HasRightWall = false;
-                    //    }
-                    //    else
-                    //    {
-                    //        row[i].HasRightWall = true;
-                    //    }
+                    // Rooms disabled
+                    // Create right walls
+                    if (this.disableLoops)
+                    {
+                        for (int i = 0; i < row.Count - 1; i++)
+                        {
+                            // Delete all rows that divide different sets
+                            if (row[i].Set != row[i + 1].Set)
+                            {
+                                row[i].HasRightWall = false;
+                            }
+                            else
+                            {
+                                row[i].HasRightWall = true;
+                            }
 
-                    //}
+                        }
+                    }
 
                     // The last cell in a row always has to have a right wall because that's where the border of the maze is.
                     row[row.Count - 1].HasRightWall = true;
@@ -119,11 +126,14 @@ namespace MazeGenerator.EllerPackage
 
                 // If there are multiple cells with the same set place a wall between them. 
                 // Otherwise you will get "holes" in your maze. Just remove this code-segment and generate some mazes to see it!
-                for (int i = 0; i < row.Count - 1; i++)
+                if (this.disableLoops)
                 {
-                    if (row[i].Set == row[i + 1].Set)
+                    for (int i = 0; i < row.Count - 1; i++)
                     {
-                        row[i].HasRightWall = true;
+                        if (row[i].Set == row[i + 1].Set)
+                        {
+                            row[i].HasRightWall = true;
+                        }
                     }
                 }
 
@@ -148,9 +158,9 @@ namespace MazeGenerator.EllerPackage
         {
             get
             {
-                int x = _rnd.Next(0, MaxBias + 1);
+                int x = _rnd.Next(0, MaxBias);
 
-                if (x > Bias)
+                if (x < this.bias)
                 {
                     return true;
                 }
@@ -173,7 +183,8 @@ namespace MazeGenerator.EllerPackage
                 {
                     row[i].HasRightWall = true;
                 }
-                else if (row[i].Set == row[i + 1].Set)
+                // Enable loops
+                else if (this.disableLoops && row[i].Set == row[i + 1].Set)
                 {
                     // If the left and the right cell have the same set there needs to be a right wall to not create loops in the maze.
                     row[i].HasRightWall = true;
@@ -213,7 +224,7 @@ namespace MazeGenerator.EllerPackage
                     else
                     {
                         // Randomly choose how many paths you want to have downwards. (NOTE: Each set needs at least one path downwards!)
-                        int downPaths = _rnd.Next(1, set.Cells.Count + 1);
+                        int downPaths = GetRandomNumberOfDownPaths(set.Cells.Count); //_rnd.Next(1, set.Cells.Count + 1);
 
                         // Randomly choose which cells of the set should have the downPaths.
                         for (int i = 0; i < downPaths; i++)
@@ -250,6 +261,25 @@ namespace MazeGenerator.EllerPackage
                     sets.Remove(set);
                 }
             }
+        }
+
+        private int GetRandomNumberOfDownPaths(int max)
+        {
+            var sum = 0;
+            for (int i = 0; i < max; i++)
+            {
+                if (_rnd.Next(0, MaxBias) > this.bias)
+                {
+                    sum += 1;
+                }
+            }
+
+            if (sum < 1)
+            {
+                sum = 1;
+            }
+
+            return sum;
         }
 
         /// <summary>

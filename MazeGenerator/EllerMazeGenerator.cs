@@ -4,19 +4,25 @@ namespace MazeGenerator
 {
     public class EllerMazeGenerator : MazeGenerator
     {
-        public override Maze Generate(int width, int height)
+        public override Maze Generate(MazeGeneratorOptions options)
         {
-            var ellerMaze = GetEllerMaze(ToEllerSize(width), ToEllerSize(height));
+            var width = options.Width;
+            var height = options.Height;
+
+            var bias = options.IsPerfectMaze ? 50 : (int) options.PercentOfWalls * 2;
+            var ellerMaze = GetEllerMaze(ToEllerSize(width), ToEllerSize(height), bias, options.IsPerfectMaze);
             //ellerMaze.PrintMaze();
             var maze = TranslateToMaze(ellerMaze);
-            base.InitStartAndFinish(maze);
+            base.InitStart(maze, options);
+            base.InitFinish(maze, options);
             return maze;
         }
 
-        private EllerPackage.Maze GetEllerMaze(int width, int height)
+        private EllerPackage.Maze GetEllerMaze(int width, int height, int bias, bool disableLoops)
         {
             var maze = new EllerPackage.Maze();
-            maze.GenerateMaze(width, height);
+            maze.GenerateMaze(width, height, bias, disableLoops);
+            //maze.PrintMaze();
             return maze;
         }
 
