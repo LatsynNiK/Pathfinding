@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.IO;
 
 namespace Common
 {
@@ -75,6 +76,18 @@ namespace Common
                     Console.Write(PrintedField[i, j].Value);
                 }
                 Console.WriteLine();
+            }
+        }
+
+        public void Print(TextWriter textWriter)
+        {
+            for (var i = 0; i < _height; i++)
+            {
+                for (var j = 0; j < _width; j++)
+                {
+                    textWriter.Write(PrintedField[i, j].Value);
+                }
+                textWriter.WriteLine();
             }
         }
     }

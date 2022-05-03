@@ -10,6 +10,7 @@ namespace PathfindingAnalyzer
     {
         public AnalysisResult RunAnalysis(AnalysisParameter parameter)
         {
+            //Console.WriteLine($"Analysis {parameter.Name} started.");
             var result = new AnalysisResult();
             foreach (var pathFinder in parameter.Pathfinders)
             {
@@ -27,9 +28,17 @@ namespace PathfindingAnalyzer
                     mazeSizeStatistics.Add(pathFinder, new List<long>());
                 }
                 Console.WriteLine($"Processed mazes: 0 / {parameter.NumberOfMazes}");
+                var mazeGeneratorOption = new MazeGeneratorOptions()
+                {
+                    Height = mazeSize,
+                    Width = mazeSize,
+                    PercentOfWalls = parameter.PercentOfWalls,
+                    IsPerfectMaze = parameter.IsPerfectMaze,
+                    StartPosition = parameter.StartPosition
+                };
                 for (int i = 0; i < parameter.NumberOfMazes; i++)
                 {
-                    var maze = mazeGenerator.Generate(mazeSize, mazeSize);
+                    var maze = mazeGenerator.Generate(mazeGeneratorOption);
                     var mazeExperimentParameter = new MazeExperimentParameter(maze, parameter.Pathfinders);
                     var mazeExperimentResult = experimentRunner.RunMazeExperiment(mazeExperimentParameter);
                     foreach (var keyValue in mazeExperimentResult)
@@ -45,7 +54,7 @@ namespace PathfindingAnalyzer
                     result.PathfindingStatistics[mazeSizeStatistic.Key].Add(mazeSize, mazeSizeStatistic.Value.Average());
                 }
             }
-
+            Console.WriteLine($"Analysis {parameter.Name} finished.");
             return result;
         }
     }
