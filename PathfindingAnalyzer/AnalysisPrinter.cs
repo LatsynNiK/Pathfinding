@@ -40,10 +40,10 @@ namespace PathfindingAnalyzer
             foreach (var pathFinder in result.PathfindingStatistics.Keys)
             {
                 _textWriter.WriteLine($"Pathfinder: {pathFinder.GetType()}");
-                _textWriter.WriteLine("\tMaze size\t\tTime (Milliseconds)");
+                _textWriter.WriteLine("\tMaze size\t\tAverage Time [ms]\t\tAverage Time [ticks = 100*ns]");
                 foreach (var line in result.PathfindingStatistics[pathFinder])
                 {
-                    _textWriter.WriteLine($"\t{line.Key}\t\t\t{line.Value}");
+                    _textWriter.WriteLine($"\t{line.Key}\t\t\t{line.Value.Milliseconds}\t\t\t{line.Value.Ticks}");
                 }
             }
             _textWriter.WriteLine();

@@ -13,9 +13,9 @@ namespace PathfindingAnalyzer
             _stopwatch = new Stopwatch();
         }
 
-        public IDictionary<PathFinder, long> RunMazeExperiment(MazeExperimentParameter parameter)
+        public IDictionary<PathFinder, PathfindingExperimentResult> RunMazeExperiment(MazeExperimentParameter parameter)
         {
-            var result = new Dictionary<PathFinder, long>();
+            var result = new Dictionary<PathFinder, PathfindingExperimentResult>();
             foreach (var pathFinder in parameter.PathFinders)
             {
                 var pathfindingExperimentParameter = new PathfindingExperimentParameter(parameter.Maze, pathFinder);
@@ -26,12 +26,16 @@ namespace PathfindingAnalyzer
             return result;
         }
 
-        long RunPathfindingExperiment(PathfindingExperimentParameter parameter)
+        PathfindingExperimentResult RunPathfindingExperiment(PathfindingExperimentParameter parameter)
         {
             _stopwatch.Start();
             var path = parameter.PathFinder.FindPath(parameter.Maze);
             _stopwatch.Stop();
-            var result = _stopwatch.ElapsedMilliseconds;
+            var result = new PathfindingExperimentResult()
+            {
+                Milliseconds = _stopwatch.ElapsedMilliseconds,
+                Ticks = _stopwatch.ElapsedTicks
+            };
             _stopwatch.Reset();
             return result;
         }

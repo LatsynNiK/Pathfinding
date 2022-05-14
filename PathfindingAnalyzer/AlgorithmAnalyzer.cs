@@ -14,7 +14,7 @@ namespace PathfindingAnalyzer
             var result = new AnalysisResult();
             foreach (var pathFinder in parameter.Pathfinders)
             {
-                result.PathfindingStatistics.Add(pathFinder, new Dictionary<int, double>());
+                result.PathfindingStatistics.Add(pathFinder, new Dictionary<int, PathfindingExperimentAggregationResult>());
             }
 
             var mazeGenerator = new EllerMazeGenerator();
@@ -22,10 +22,10 @@ namespace PathfindingAnalyzer
             foreach (var mazeSize in parameter.MazeSizes)
             {
                 Console.WriteLine($"Maze size: {mazeSize}.");
-                var mazeSizeStatistics = new Dictionary<PathFinder, IList<long>>();
+                var mazeSizeStatistics = new Dictionary<PathFinder, IList<PathfindingExperimentResult>>();
                 foreach (var pathFinder in parameter.Pathfinders)
                 {
-                    mazeSizeStatistics.Add(pathFinder, new List<long>());
+                    mazeSizeStatistics.Add(pathFinder, new List<PathfindingExperimentResult>());
                 }
                 Console.WriteLine($"Processed mazes: 0 / {parameter.NumberOfMazes}");
                 var mazeGeneratorOption = new MazeGeneratorOptions()
@@ -51,7 +51,14 @@ namespace PathfindingAnalyzer
                 }
                 foreach (var mazeSizeStatistic in mazeSizeStatistics)
                 {
-                    result.PathfindingStatistics[mazeSizeStatistic.Key].Add(mazeSize, mazeSizeStatistic.Value.Average());
+                    var aveMilliseconds = mazeSizeStatistic.Value.Select(x => x.Milliseconds).Average();
+                    var aveTicks = mazeSizeStatistic.Value.Select(x => x.Ticks).Average();
+                    result.PathfindingStatistics[mazeSizeStatistic.Key]
+                        .Add(mazeSize, new PathfindingExperimentAggregationResult()
+                        {
+                            Milliseconds = aveMilliseconds,
+                            Ticks = aveTicks
+                        });
                 }
             }
             Console.WriteLine($"Analysis {parameter.Name} finished.");
