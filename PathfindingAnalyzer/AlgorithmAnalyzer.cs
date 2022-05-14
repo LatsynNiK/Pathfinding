@@ -41,7 +41,7 @@ namespace PathfindingAnalyzer
                     var maze = mazeGenerator.Generate(mazeGeneratorOption);
                     var mazeExperimentParameter = new MazeExperimentParameter(maze, parameter.Pathfinders);
                     var mazeExperimentResult = experimentRunner.RunMazeExperiment(mazeExperimentParameter);
-                    foreach (var keyValue in mazeExperimentResult)
+                    foreach (var keyValue in mazeExperimentResult.Statistics)
                     {
                         mazeSizeStatistics[keyValue.Key].Add(keyValue.Value);
                     }

@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Diagnostics;
-using Pathfinding;
+﻿using System.Diagnostics;
 
 namespace PathfindingAnalyzer
 {
@@ -13,14 +11,14 @@ namespace PathfindingAnalyzer
             _stopwatch = new Stopwatch();
         }
 
-        public IDictionary<PathFinder, PathfindingExperimentResult> RunMazeExperiment(MazeExperimentParameter parameter)
+        public MazeExperimentResult RunMazeExperiment(MazeExperimentParameter parameter)
         {
-            var result = new Dictionary<PathFinder, PathfindingExperimentResult>();
+            var result = new MazeExperimentResult();
             foreach (var pathFinder in parameter.PathFinders)
             {
                 var pathfindingExperimentParameter = new PathfindingExperimentParameter(parameter.Maze, pathFinder);
                 var pathfinderExperimentResult = RunPathfindingExperiment(pathfindingExperimentParameter);
-                result.Add(pathFinder, pathfinderExperimentResult);
+                result.Statistics.Add(pathFinder, pathfinderExperimentResult);
             }
 
             return result;
