@@ -26,7 +26,7 @@ namespace PathfindingAnalyzer
             _textWriter.WriteLine("Parameters:");
             _textWriter.WriteLine($"\tNumber of mazes for each experiment: {parameter.NumberOfMazes}");
             _textWriter.WriteLine($"\tPerfect mazes: {parameter.IsPerfectMaze}");
-            if (parameter.IsPerfectMaze)
+            if (!parameter.IsPerfectMaze)
             {
                 _textWriter.WriteLine($"\tPercent of walls: {parameter.PercentOfWalls}");
             }
