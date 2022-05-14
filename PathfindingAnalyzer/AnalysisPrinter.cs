@@ -51,7 +51,13 @@ namespace PathfindingAnalyzer
 
         private void PrintExample(AnalysisParameter parameter)
         {
+            var leeStep = "o ";
+            var aStarStep = "x ";
+
             _textWriter.WriteLine("Example maze:");
+            _textWriter.WriteLine($"\tLee:\t\t{leeStep}");
+            _textWriter.WriteLine($"\tA Start:\t\t{aStarStep}");
+
             _textWriter.WriteLine();
             var mazeGenerator = new EllerMazeGenerator();
             var maze = mazeGenerator.Generate(new MazeGeneratorOptions()
@@ -71,8 +77,8 @@ namespace PathfindingAnalyzer
 
             var mazePrinter = new MazePrinter();
             mazePrinter.AddMazeLayer(maze)
-                .AddPathLayer(leePath, "o ")
-                .AddPathLayer(aStarPath, "x ")
+                .AddPathLayer(leePath, leeStep)
+                .AddPathLayer(aStarPath, aStarStep)
                 .AddStartAndFinish(maze.Start, maze.Finish)
                 .Print(_textWriter);
             _textWriter.WriteLine();
